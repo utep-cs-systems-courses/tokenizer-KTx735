@@ -12,7 +12,7 @@ int spar_char(char c)
 
 int non_space_char(char c)
 {
-  if(c != '\t' && c != ' ' && c != '\o')
+  if(c != '\t' && c != ' ' && c != '\0')
     {
       return 1;
   }
@@ -34,4 +34,32 @@ int *word_terminator(char *word)
   while(space_char(word[end]))
     end++;
   return &word[end];
+}
+
+int count_words(char *str)
+{
+  int counter = 0;
+
+  while(*str != '\0')
+    {
+      str = word_terminator(str);
+      counter++;
+    }
+  if(space_char(*(str-1)))
+      return counter;
+}
+
+int *copy_str(char *inStr, short len)
+{
+  char *str = (char *) malloc((len + 1) * sizeof (char)); 
+
+  for (int i = 0; i <= len; i++) {
+
+    str[i] = inStr[i];
+
+  }
+
+  str[len] = '\0';
+
+  return str;
 }
