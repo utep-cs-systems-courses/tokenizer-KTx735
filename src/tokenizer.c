@@ -53,13 +53,10 @@ int *copy_str(char *inStr, short len)
 {
   char *str = (char *) malloc((len + 1) * sizeof (char)); 
 
-  for (int i = 0; i <= len; i++) {
-
+  for (int i = 0; i <= len; i++)
+    {
     str[i] = inStr[i];
-
-  }
-
+    }
   str[len] = '\0';
-
   return str;
 }
