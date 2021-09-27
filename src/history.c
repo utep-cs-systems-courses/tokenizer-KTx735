@@ -4,8 +4,8 @@
 
 List *init_history()
 {
-  List *list = malloc(sizeOf(List));
-  List ->root = malloc(sizeOf(Item));
+  List *list = malloc(sizeof(List));
+  list->root = malloc(sizeof(Item));
 
   return list;
 }
@@ -13,39 +13,39 @@ List *init_history()
 void add_history(List *list, char *str)
 {
   Item *temp = list->root;
-  Item *add = malloc(sizeOf(Item));
+  Item *add = malloc(sizeof(Item));
   add->str = str;
 
-  while(temp->next != NULL)
+  while (temp->next != NULL)
     {
-      temp = temp->next;
-    }
-  temp->next = add;
-  temp->next->id = temp->id +;
+    temp = temp->next;
+  }
+  temp->next = add; 
+  temp->next->id = temp->id + 1;
 }
 
 char *get_history(List *list, int id)
 {
-  Item *temp = list->root->next;
+  Item *temp = list->root;
 
-  while(temp != NULL)
-    {
-      if (id == temp->id) return temp->str;
-      temp = temp->next;
+  while (temp != 0) { // Traverse whole list
+    if (temp->id == id) {
+      return temp->str;
     }
-  printf("Returned Null");
-  return NULL;
+    temp = temp->next;
+  }
+  return "id not found";
 }
 
 void print_history(List *list)
 {
   Item *temp = list->root->next;
 
-  while(temp != NULL)
+  while (temp != NULL)
     {
-      printf("%d.- %s\n", temp->id, temp->str);
-      temp = temp->next;
-    }
+    printf("%d.-  %s\n",temp->id, temp->str);
+    temp = temp->next;
+  }
 }
 
 void free_history(List *list)
@@ -53,11 +53,11 @@ void free_history(List *list)
   Item *temp1 = list->root->next;
   Item *temp2 = list->root->next;
 
-  while(temp1 != NULL)
+  while (temp1 != NULL)
     {
-      temp2 = temp2->next;
-      free(temp1);
-      temp1 = temp2;
-    }
+    temp2 = temp2->next; /* Advance to next Item */
+    free(temp1); /* Free previous Item */
+    temp1 = temp2; /* Advance to next Item */
+  }
   free(list);
 }

@@ -1,7 +1,11 @@
-tokenizer: tokenizer.o
-	cc -o tokenizer tokenizer.o
+tokenizer: tokenizer.o uimain.o history.o
+	cc -o tokenizer tokenizer.o uimain.o history.o
 
 clean:
 	rm -f *.o tokenizer
 
-tokenizer: tokenizer.c tokenizer.h
+tokenizer.o: tokenizer.h tokenizer.c
+
+uimain.o: uimain.c tokenizer.h history.h
+
+history.o: history.h history.c tokenizer.h
